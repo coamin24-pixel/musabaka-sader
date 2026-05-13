@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة | المسابقة الثقافية</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="admin-login-screen">
+        <div class="admin-login-card">
+            <div class="admin-login-icon">
+                <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h1>🔐 لوحة الإدارة</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" id="adminPassword" class="form-input" required autocomplete="off">
+                </div>
+                <div id="loginError" style="color: #dc2626; margin-bottom: 1rem; display: none; font-weight: 600;"></div>
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">دخول</button>
+            </form>
+            <p style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                <a href="index.html" style="color: var(--primary);">← العودة للصفحة الرئيسية</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin App -->
+    <div id="adminApp" class="admin-app" style="display: none;">
+        <!-- Sidebar -->
+        <aside id="adminSidebar" class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>⚙️ الإدارة</h2>
+                <p>المسابقة الثقافية</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-nav-item active" data-page="dashboard">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>لوحة المعلومات</span>
+                </div>
+                <div class="sidebar-nav-item" data-page="students">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <span>الطلاب</span>
+                </div>
+                <div class="sidebar-nav-item" data-page="days">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>أيام المسابقة</span>
+                </div>
+                <div class="sidebar-nav-item" data-page="questions">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>الأسئلة</span>
+                </div>
+                <div class="sidebar-nav-item" data-page="results">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <span>النتائج</span>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn">🚪 تسجيل خروج</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <button id="mobileMenuToggle" class="mobile-menu-toggle">☰</button>
+
+            <!-- Dashboard Page -->
+            <div id="page-dashboard" class="admin-page active">
+                <div class="page-header">
+                    <h1>📊 لوحة المعلومات</h1>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="dashboard-stat">
+                        <div class="dashboard-stat-icon blue">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                        </div>
+                        <div class="dashboard-stat-info">
+                            <h3>عدد الطلاب</h3>
+                            <div class="value" id="statStudents">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stat">
+                        <div class="dashboard-stat-icon green">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div class="dashboard-stat-info">
+                            <h3>عدد الأسئلة</h3>
+                            <div class="value" id="statQuestions">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stat">
+                        <div class="dashboard-stat-icon orange">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <div class="dashboard-stat-info">
+                            <h3>مسابقات منجزة</h3>
+                            <div class="value" id="statSessions">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stat">
+                        <div class="dashboard-stat-icon purple">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="dashboard-stat-info">
+                            <h3>أيام المسابقة</h3>
+                            <div class="value" id="statDays">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="activeDayBanner" class="active-day-banner" style="display: none;">
+                    <div>
+                        <h3>🟢 اليوم النشط حالياً</h3>
+                        <p><strong id="activeDayName">-</strong> — <span id="activeDayDate">-</span></p>
+                    </div>
+                    <div>
+                        <span style="font-size: 2rem;">🎯</span>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3>🚀 خطوات البدء السريعة</h3>
+                    </div>
+                    <ol style="padding-right: 1.5rem; line-height: 2.2;">
+                        <li>أضف <strong>أيام المسابقة</strong> من قسم "أيام المسابقة"</li>
+                        <li>ارفع <strong>قائمة الطلاب</strong> من ملف Excel في قسم "الطلاب"</li>
+                        <li>ارفع <strong>الأسئلة</strong> من ملف Word في قسم "الأسئلة"</li>
+                        <li>قم بـ <strong>تفعيل</strong> اليوم المطلوب من قسم "أيام المسابقة"</li>
+                        <li>اطلب من الطلاب الدخول من الصفحة الرئيسية باستخدام أرقامهم الخاصة</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Students Page -->
+            <div id="page-students" class="admin-page">
+                <div class="page-header">
+                    <h1>👨‍🎓 إدارة الطلاب</h1>
+                    <div class="page-header-actions">
+                        <button id="downloadTemplateBtn" class="btn btn-outline">📥 تحميل قالب Excel</button>
+                        <button id="addStudentBtn" class="btn btn-primary">+ إضافة طالب</button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">📤 رفع طلاب من ملف Excel</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                        يجب أن يحتوي الملف على الأعمدة: <strong>الرقم الخاص</strong>، <strong>اسم الطالب</strong> (اختياري)، <strong>الشعبة الصفية</strong>
+                    </p>
+                    <div class="upload-area" id="studentsUploadArea">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <h3>اضغط أو اسحب ملف Excel هنا</h3>
+                        <p>الصيغ المدعومة: .xlsx, .xls</p>
+                        <input type="file" id="studentsFileInput" accept=".xlsx,.xls">
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3>قائمة الطلاب</h3>
+                    </div>
+                    <div class="filters-row">
+                        <div class="form-group">
+                            <label class="form-label">بحث</label>
+                            <div class="search-input-wrapper">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                <input type="text" id="studentSearch" class="form-input" placeholder="ابحث بالرقم أو الاسم أو الشعبة...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الرقم الخاص</th>
+                                    <th>اسم الطالب</th>
+                                    <th>الشعبة</th>
+                                    <th>تاريخ الإضافة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <tr><td colspan="5" class="loading-row">⏳ جاري التحميل...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Days Page -->
+            <div id="page-days" class="admin-page">
+                <div class="page-header">
+                    <h1>📅 أيام المسابقة</h1>
+                    <div class="page-header-actions">
+                        <button id="addDayBtn" class="btn btn-primary">+ إضافة يوم جديد</button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                        💡 <strong>ملاحظة:</strong> يمكن تفعيل يوم واحد فقط في كل مرة. الطلاب سيرون الأسئلة الخاصة باليوم النشط.
+                    </p>
+                    <div id="daysGrid" class="days-grid"></div>
+                </div>
+            </div>
+
+            <!-- Questions Page -->
+            <div id="page-questions" class="admin-page">
+                <div class="page-header">
+                    <h1>📝 إدارة الأسئلة</h1>
+                    <div class="page-header-actions">
+                        <button id="addQuestionBtn" class="btn btn-primary">+ إضافة سؤال يدوياً</button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">📤 رفع أسئلة من ملف Word</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                        يتم استخراج الأسئلة تلقائياً من ملف Word. بعد الرفع، يتم فتح نافذة لمراجعة وحفظ كل سؤال على حدة.
+                    </p>
+
+                    <details style="margin-bottom: 1rem;">
+                        <summary style="cursor: pointer; font-weight: 600; color: var(--primary); padding: 0.5rem 0;">
+                            📋 مثال على تنسيق الملف
+                        </summary>
+                        <div class="format-example"><strong>السؤال:</strong> ما هي عاصمة المملكة العربية السعودية؟
+أ) القاهرة
+ب) الرياض
+ج) دبي
+د) عمان
+<strong>الإجابة:</strong> ب
+
+<strong>السؤال:</strong> كم عدد كواكب المجموعة الشمسية؟
+أ) 7
+ب) 8
+ج) 9
+د) 10
+<strong>الإجابة:</strong> ب</div>
+                    </details>
+
+                    <div class="upload-area" id="questionsUploadArea">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                        </svg>
+                        <h3>اضغط أو اسحب ملف Word هنا</h3>
+                        <p>الصيغة المدعومة: .docx</p>
+                        <input type="file" id="questionsFileInput" accept=".docx">
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3>قائمة الأسئلة</h3>
+                    </div>
+                    <div class="filters-row">
+                        <div class="form-group">
+                            <label class="form-label">اليوم</label>
+                            <select id="questionFilterDay" class="form-select">
+                                <option value="">جميع الأيام</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المادة</label>
+                            <select id="questionFilterSubject" class="form-select">
+                                <option value="">جميع المواد</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="science">العلوم</option>
+                                <option value="arabic">اللغة العربية</option>
+                                <option value="english">اللغة الإنجليزية</option>
+                                <option value="islamic">التربية الإسلامية</option>
+                                <option value="social">الاجتماعيات</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="questionsList"></div>
+                </div>
+            </div>
+
+            <!-- Results Page -->
+            <div id="page-results" class="admin-page">
+                <div class="page-header">
+                    <h1>📈 النتائج والإحصائيات</h1>
+                    <div class="page-header-actions">
+                        <button id="exportResultsBtn" class="btn btn-primary">📥 تصدير Excel</button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="filters-row">
+                        <div class="form-group">
+                            <label class="form-label">تصفية حسب اليوم</label>
+                            <select id="resultsFilterDay" class="form-select">
+                                <option value="">جميع الأيام</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الترتيب</th>
+                                    <th>الرقم</th>
+                                    <th>الاسم</th>
+                                    <th>الشعبة</th>
+                                    <th>اليوم</th>
+                                    <th>النتيجة</th>
+                                    <th>الإجابات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <tr><td colspan="7" class="loading-row">⏳ جاري التحميل...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Student Modal -->
+    <div id="studentModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="studentModalTitle">إضافة طالب</h2>
+                <button type="button" class="modal-close" onclick="closeModal('studentModal')">✕</button>
+            </div>
+            <form id="studentForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">الرقم الخاص *</label>
+                        <input type="text" id="studentNumberInput" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">اسم الطالب (اختياري)</label>
+                        <input type="text" id="studentNameInput" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الشعبة الصفية *</label>
+                        <input type="text" id="studentClassInput" class="form-input" placeholder="مثال: 6/1" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">💾 حفظ</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal('studentModal')">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Day Modal -->
+    <div id="dayModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>إضافة يوم جديد</h2>
+                <button type="button" class="modal-close" onclick="closeModal('dayModal')">✕</button>
+            </div>
+            <form id="dayForm">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">رقم اليوم *</label>
+                            <input type="number" id="dayNumberInput" class="form-input" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">التاريخ</label>
+                            <input type="date" id="dayDateInput" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">اسم اليوم *</label>
+                        <input type="text" id="dayNameInput" class="form-input" placeholder="مثال: اليوم الأول" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">💾 إضافة</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal('dayModal')">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div id="questionModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="questionModalTitle">إضافة سؤال</h2>
+                <button type="button" class="modal-close" onclick="closeModal('questionModal')">✕</button>
+            </div>
+            <form id="questionForm">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">اليوم *</label>
+                            <select id="questionDayInput" class="form-select" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">المادة *</label>
+                            <select id="questionSubjectInput" class="form-select" required>
+                                <option value="">-- اختر --</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="science">العلوم</option>
+                                <option value="arabic">اللغة العربية</option>
+                                <option value="english">اللغة الإنجليزية</option>
+                                <option value="islamic">التربية الإسلامية</option>
+                                <option value="social">الاجتماعيات</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">نص السؤال *</label>
+                        <textarea id="questionTextInput" class="form-input" rows="2" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الخيار أ *</label>
+                            <input type="text" id="questionOptionA" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الخيار ب *</label>
+                            <input type="text" id="questionOptionB" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الخيار ج *</label>
+                            <input type="text" id="questionOptionC" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الخيار د *</label>
+                            <input type="text" id="questionOptionD" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الإجابة الصحيحة *</label>
+                            <select id="questionCorrectAnswer" class="form-select" required>
+                                <option value="">-- اختر --</option>
+                                <option value="A">أ</option>
+                                <option value="B">ب</option>
+                                <option value="C">ج</option>
+                                <option value="D">د</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رابط الصورة (اختياري)</label>
+                            <input type="url" id="questionImageUrl" class="form-input" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">💾 حفظ السؤال</button>
+                    <div id="importNav" style="display: none; align-items: center; gap: 0.5rem;">
+                        <button type="button" class="btn btn-outline" onclick="skipImportQuestion()">تخطي →</button>
+                        <span id="importCounter" style="color: var(--text-muted); font-weight: 600;"></span>
+                    </div>
+                    <button type="button" class="btn btn-outline" onclick="closeModal('questionModal')">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-message" id="toastMessage"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e40af">
+    <title>النتائج | مدرسة الزبير بن العوام</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/results.css">
+</head>
+<body>
+    <div class="bg-decoration">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+    </div>
+
+    <main class="results-container">
+        <!-- بطاقة الترحيب -->
+        <div class="hero-section animate-fade-in-up">
+            <div class="trophy-icon" id="trophyIcon">🏆</div>
+            <h1 class="results-title">انتهت المسابقة!</h1>
+            <p class="results-subtitle" id="resultsSubtitle">رائع! لقد أكملت المسابقة بنجاح</p>
+            <p class="student-info-text">
+                <span id="resultStudentName">-</span> • 
+                <span id="resultStudentClass">-</span>
+            </p>
+        </div>
+
+        <!-- النتيجة النهائية -->
+        <div class="score-card animate-fade-in-up" style="animation-delay: 0.1s">
+            <div class="score-label">نتيجتك النهائية</div>
+            <div class="score-value">
+                <span id="finalScore">0</span>
+                <span class="score-suffix">نقطة</span>
+            </div>
+            <div class="score-bar">
+                <div class="score-bar-fill" id="scoreBarFill"></div>
+            </div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div class="stats-grid">
+            <div class="stat-card stat-correct animate-fade-in-up" style="animation-delay: 0.2s">
+                <div class="stat-icon">✓</div>
+                <div class="stat-number" id="correctCount">0</div>
+                <div class="stat-label">إجابة صحيحة</div>
+            </div>
+            <div class="stat-card stat-wrong animate-fade-in-up" style="animation-delay: 0.3s">
+                <div class="stat-icon">✗</div>
+                <div class="stat-number" id="wrongCount">0</div>
+                <div class="stat-label">إجابة خاطئة</div>
+            </div>
+            <div class="stat-card stat-time animate-fade-in-up" style="animation-delay: 0.4s">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-number" id="totalTime">0:00</div>
+                <div class="stat-label">الوقت المستغرق</div>
+            </div>
+            <div class="stat-card stat-percent animate-fade-in-up" style="animation-delay: 0.5s">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" id="accuracyPercent">0%</div>
+                <div class="stat-label">نسبة الدقة</div>
+            </div>
+        </div>
+
+        <!-- الإجابات -->
+        <div class="answers-section animate-fade-in-up" style="animation-delay: 0.6s">
+            <div class="section-header">
+                <h2>مراجعة الإجابات</h2>
+                <button id="toggleAnswers" class="btn btn-outline btn-sm">
+                    <span id="toggleText">عرض الإجابات</span>
+                </button>
+            </div>
+            <div id="answersContainer" class="answers-list hidden"></div>
+        </div>
+
+        <!-- الأزرار -->
+        <div class="actions">
+            <a href="leaderboard.html" class="btn btn-lg">
+                <span>🏅</span>
+                <span>عرض لوحة الصدارة</span>
+            </a>
+            <a href="index.html" class="btn btn-outline btn-lg">
+                <span>🏠</span>
+                <span>العودة للرئيسية</span>
+            </a>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/results.js"></script>
+</body>
+</html>

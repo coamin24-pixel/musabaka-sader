@@ -1,0 +1,404 @@
+/* ============================================
+   صفحة النتائج - Results Page Styles
+   ============================================ */
+
+.results-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+}
+
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--primary);
+    top: -150px;
+    right: -150px;
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    bottom: -100px;
+    left: -100px;
+}
+
+/* --- قسم الترحيب --- */
+.hero-section {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.trophy-icon {
+    font-size: 6rem;
+    margin-bottom: 16px;
+    display: inline-block;
+    animation: trophyBounce 2s ease infinite;
+}
+
+@keyframes trophyBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(-5deg); }
+    75% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.results-title {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.results-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.student-info-text {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* --- بطاقة النتيجة --- */
+.score-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(30, 64, 175, 0.3);
+}
+
+.score-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.score-label {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.score-value {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-family: var(--font-display);
+    position: relative;
+    z-index: 1;
+}
+
+.score-suffix {
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-right: 8px;
+}
+
+.score-bar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.score-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, #fbbf24 100%);
+    border-radius: var(--radius-full);
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- شبكة الإحصائيات --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border-top: 4px solid var(--primary);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-correct { border-top-color: var(--success); }
+.stat-wrong { border-top-color: var(--danger); }
+.stat-time { border-top-color: var(--secondary); }
+.stat-percent { border-top-color: var(--accent); }
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    margin-bottom: 4px;
+}
+
+.stat-correct .stat-number { color: var(--success); }
+.stat-wrong .stat-number { color: var(--danger); }
+.stat-time .stat-number { color: var(--secondary); }
+.stat-percent .stat-number { color: var(--accent-dark); }
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* --- قسم الإجابات --- */
+.answers-section {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 32px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.answer-item {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border-right: 4px solid var(--success);
+    transition: all var(--transition-base);
+}
+
+.answer-item.wrong {
+    border-right-color: var(--danger);
+}
+
+.answer-item.skipped {
+    border-right-color: var(--warning);
+}
+
+.answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.answer-number {
+    background: var(--primary);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.answer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.answer-status.correct {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.answer-status.wrong {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.answer-question {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+.answer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.answer-option {
+    padding: 8px 12px;
+    background: white;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+}
+
+.answer-option.correct-answer {
+    border-color: var(--success);
+    background: #d1fae5;
+    font-weight: 700;
+}
+
+.answer-option.student-answer-wrong {
+    border-color: var(--danger);
+    background: #fee2e2;
+    text-decoration: line-through;
+}
+
+.answer-option-letter {
+    width: 28px;
+    height: 28px;
+    background: var(--border-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.answer-option.correct-answer .answer-option-letter {
+    background: var(--success);
+    color: white;
+}
+
+.answer-option.student-answer-wrong .answer-option-letter {
+    background: var(--danger);
+    color: white;
+}
+
+/* --- الأزرار --- */
+.actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* --- التجاوب --- */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .score-value {
+        font-size: 3.5rem;
+    }
+    
+    .results-title {
+        font-size: 2rem;
+    }
+    
+    .trophy-icon {
+        font-size: 4.5rem;
+    }
+    
+    .answers-section {
+        padding: 20px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 16px 8px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}

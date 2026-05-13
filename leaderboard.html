@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e40af">
+    <title>لوحة الصدارة | مدرسة الزبير بن العوام</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
+</head>
+<body>
+    <header class="page-header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">
+                <span>→</span>
+                <span>الرئيسية</span>
+            </a>
+            <div class="header-title">
+                <h1>🏅 لوحة الصدارة</h1>
+                <p>مدرسة الزبير بن العوام الابتدائية للبنين</p>
+            </div>
+            <div class="header-spacer"></div>
+        </div>
+    </header>
+
+    <!-- التبويبات -->
+    <div class="tabs-container">
+        <button class="tab-btn active" data-tab="overall">
+            <span>🌟</span>
+            <span>الأفضل عام</span>
+        </button>
+        <button class="tab-btn" data-tab="daily">
+            <span>📅</span>
+            <span>أفضل اليوم</span>
+        </button>
+        <button class="tab-btn" data-tab="classes">
+            <span>🏫</span>
+            <span>ترتيب الشعب</span>
+        </button>
+        <button class="tab-btn" data-tab="stats">
+            <span>📊</span>
+            <span>الإحصائيات</span>
+        </button>
+    </div>
+
+    <main class="leaderboard-main">
+        
+        <!-- المنصة العامة (Top 3) -->
+        <section id="podium-section" class="podium-section">
+            <div class="podium-container">
+                <div class="podium-item podium-2nd" id="podium2">
+                    <div class="podium-rank">2</div>
+                    <div class="podium-avatar">🥈</div>
+                    <div class="podium-name">-</div>
+                    <div class="podium-score">- نقطة</div>
+                </div>
+                <div class="podium-item podium-1st" id="podium1">
+                    <div class="podium-rank">1</div>
+                    <div class="podium-crown">👑</div>
+                    <div class="podium-avatar">🥇</div>
+                    <div class="podium-name">-</div>
+                    <div class="podium-score">- نقطة</div>
+                </div>
+                <div class="podium-item podium-3rd" id="podium3">
+                    <div class="podium-rank">3</div>
+                    <div class="podium-avatar">🥉</div>
+                    <div class="podium-name">-</div>
+                    <div class="podium-score">- نقطة</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قائمة الترتيب -->
+        <section id="rankings-section" class="rankings-section">
+            <h2 class="section-title" id="rankingsTitle">المراكز التالية</h2>
+            <div id="rankingsList" class="rankings-list"></div>
+            <div id="emptyState" class="empty-state hidden">
+                <div class="empty-icon">🎯</div>
+                <p>لا توجد نتائج لعرضها بعد</p>
+            </div>
+        </section>
+
+        <!-- ترتيب الشعب -->
+        <section id="classes-section" class="classes-section hidden">
+            <h2 class="section-title">ترتيب الشعب الصفية</h2>
+            <div id="classesList" class="classes-list"></div>
+        </section>
+
+        <!-- الإحصائيات -->
+        <section id="stats-section" class="stats-section hidden">
+            <h2 class="section-title">إحصائيات المسابقة</h2>
+            <div class="stats-grid-large">
+                <div class="big-stat">
+                    <div class="big-stat-icon">👥</div>
+                    <div class="big-stat-number" id="totalStudents">0</div>
+                    <div class="big-stat-label">إجمالي الطلاب</div>
+                </div>
+                <div class="big-stat">
+                    <div class="big-stat-icon">✅</div>
+                    <div class="big-stat-number" id="participatedStudents">0</div>
+                    <div class="big-stat-label">طلاب مشاركين</div>
+                </div>
+                <div class="big-stat">
+                    <div class="big-stat-icon">📈</div>
+                    <div class="big-stat-number" id="participationRate">0%</div>
+                    <div class="big-stat-label">نسبة المشاركة</div>
+                </div>
+                <div class="big-stat">
+                    <div class="big-stat-icon">⭐</div>
+                    <div class="big-stat-number" id="avgScore">0</div>
+                    <div class="big-stat-label">متوسط النقاط</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="loadingOverlay" class="loader-overlay">
+        <div class="loader"></div>
+        <p>جاري تحميل لوحة الصدارة...</p>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/leaderboard.js"></script>
+</body>
+</html>

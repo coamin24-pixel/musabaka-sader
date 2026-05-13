@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e40af">
+    <title>المسابقة الثقافية للصف السادس | مدرسة الزبير بن العوام</title>
+    
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <!-- خلفية مزخرفة -->
+    <div class="bg-decoration">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+        <div class="bg-shape shape-4"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="login-container">
+        <!-- بطاقة الدخول -->
+        <div class="login-card animate-fade-in-up">
+            
+            <!-- شعار المدرسة -->
+            <div class="school-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- العناوين -->
+            <div class="login-header">
+                <h1 class="school-name">مدرسة الزبير بن العوام الابتدائية للبنين</h1>
+                <div class="competition-badge">
+                    <span class="badge-icon">🏆</span>
+                    <span>المسابقة الثقافية للصف السادس</span>
+                </div>
+            </div>
+
+            <!-- نموذج الدخول -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="studentNumber" class="form-label">
+                        <span class="label-icon">🎓</span>
+                        الرقم الخاص بالطالب
+                    </label>
+                    <input 
+                        type="text" 
+                        id="studentNumber" 
+                        class="form-input student-input" 
+                        placeholder="أدخل رقمك الخاص هنا"
+                        autocomplete="off"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <!-- معلومات الطالب (تظهر بعد التحقق) -->
+                <div id="studentInfo" class="student-info hidden">
+                    <div class="info-row">
+                        <span class="info-label">الاسم:</span>
+                        <span class="info-value" id="studentNameDisplay">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">الشعبة:</span>
+                        <span class="info-value" id="studentClassDisplay">-</span>
+                    </div>
+                </div>
+
+                <!-- رسالة الخطأ -->
+                <div id="errorMessage" class="alert alert-danger hidden">
+                    <span>⚠️</span>
+                    <span id="errorText"></span>
+                </div>
+
+                <!-- زر الدخول -->
+                <button type="submit" id="loginButton" class="btn btn-lg w-full">
+                    <span class="btn-text">ابدأ المسابقة</span>
+                    <span class="btn-icon">🚀</span>
+                </button>
+            </form>
+
+            <!-- المعلومات السفلية -->
+            <div class="login-footer">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-icon">📝</div>
+                        <div class="info-card-text">
+                            <strong>18 سؤال</strong>
+                            <span>متنوعة</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">⏱️</div>
+                        <div class="info-card-text">
+                            <strong>30 ثانية</strong>
+                            <span>لكل سؤال</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">🎯</div>
+                        <div class="info-card-text">
+                            <strong>6 مواد</strong>
+                            <span>دراسية</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- روابط سفلية -->
+        <div class="bottom-links">
+            <a href="leaderboard.html" class="bottom-link">
+                <span>🏅</span>
+                <span>لوحة الصدارة</span>
+            </a>
+            <a href="admin.html" class="bottom-link">
+                <span>⚙️</span>
+                <span>لوحة التحكم</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- شاشة التحميل -->
+    <div id="loadingOverlay" class="loader-overlay hidden">
+        <div class="loader"></div>
+        <p>جاري التحقق من البيانات...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

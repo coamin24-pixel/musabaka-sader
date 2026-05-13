@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e40af">
+    <title>المسابقة | مدرسة الزبير بن العوام</title>
+    
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+    <!-- شريط علوي -->
+    <header class="quiz-header">
+        <div class="header-content">
+            <div class="school-info">
+                <div class="school-icon">📚</div>
+                <div class="school-text">
+                    <div class="school-title">مدرسة الزبير بن العوام الابتدائية للبنين</div>
+                    <div class="school-subtitle">المسابقة الثقافية للصف السادس</div>
+                </div>
+            </div>
+            <div class="student-badge">
+                <span class="student-badge-icon">👤</span>
+                <div class="student-badge-info">
+                    <span id="studentNameBadge">-</span>
+                    <span id="studentClassBadge" class="class-tag">-</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط التقدم -->
+    <div class="progress-section">
+        <div class="progress-info">
+            <div class="progress-stat">
+                <span class="stat-label">السؤال</span>
+                <span class="stat-value">
+                    <span id="currentQuestionNum">1</span>
+                    <span class="stat-divider">/</span>
+                    <span id="totalQuestionsNum">18</span>
+                </span>
+            </div>
+            <div class="progress-stat">
+                <span class="stat-label">النقاط</span>
+                <span class="stat-value points-value">
+                    <span id="currentScore">0</span>
+                    <span class="stat-icon">⭐</span>
+                </span>
+            </div>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- المؤقت -->
+    <div class="timer-container">
+        <div class="timer-circle" id="timerCircle">
+            <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="54" class="timer-bg"/>
+                <circle cx="60" cy="60" r="54" class="timer-progress" id="timerProgress"/>
+            </svg>
+            <div class="timer-number" id="timerNumber">30</div>
+        </div>
+    </div>
+
+    <!-- محتوى السؤال -->
+    <main class="quiz-main">
+        <div class="question-card animate-fade-in-up" id="questionCard">
+            <!-- شارة المادة -->
+            <div class="subject-badge" id="subjectBadge">
+                <span id="subjectIcon">📐</span>
+                <span id="subjectName">الرياضيات</span>
+            </div>
+
+            <!-- صورة السؤال -->
+            <div class="question-image-container" id="questionImageContainer">
+                <img id="questionImage" src="" alt="صورة السؤال">
+            </div>
+
+            <!-- نص السؤال -->
+            <h2 class="question-text" id="questionText">
+                جاري تحميل السؤال...
+            </h2>
+
+            <!-- الخيارات -->
+            <div class="options-container" id="optionsContainer">
+                <button class="option-btn" data-option="A">
+                    <span class="option-letter">أ</span>
+                    <span class="option-text" id="optionA">-</span>
+                </button>
+                <button class="option-btn" data-option="B">
+                    <span class="option-letter">ب</span>
+                    <span class="option-text" id="optionB">-</span>
+                </button>
+                <button class="option-btn" data-option="C">
+                    <span class="option-letter">ج</span>
+                    <span class="option-text" id="optionC">-</span>
+                </button>
+                <button class="option-btn" data-option="D">
+                    <span class="option-letter">د</span>
+                    <span class="option-text" id="optionD">-</span>
+                </button>
+            </div>
+
+            <!-- زر التالي -->
+            <button id="nextButton" class="btn btn-lg next-btn hidden">
+                <span>السؤال التالي</span>
+                <span>←</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- نافذة الفيدباك -->
+    <div id="feedbackOverlay" class="feedback-overlay hidden">
+        <div class="feedback-card" id="feedbackCard">
+            <div class="feedback-icon" id="feedbackIcon">✓</div>
+            <h3 class="feedback-title" id="feedbackTitle">إجابة صحيحة!</h3>
+            <p class="feedback-points" id="feedbackPoints">+100 نقطة</p>
+        </div>
+    </div>
+
+    <!-- شاشة التحميل -->
+    <div id="loadingOverlay" class="loader-overlay">
+        <div class="loader"></div>
+        <p>جاري تحميل المسابقة...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>

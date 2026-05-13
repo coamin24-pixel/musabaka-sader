@@ -1,0 +1,525 @@
+/* ============================================
+   لوحة الصدارة - Leaderboard Styles
+   ============================================ */
+
+/* --- شريط علوي --- */
+.page-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15), transparent 70%);
+}
+
+.header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    transition: all var(--transition-base);
+    backdrop-filter: blur(10px);
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.header-title {
+    text-align: center;
+    flex: 1;
+}
+
+.header-title h1 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.header-title p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.header-spacer {
+    width: 80px;
+}
+
+/* --- التبويبات --- */
+.tabs-container {
+    background: white;
+    padding: 12px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tab-btn {
+    background: var(--bg-primary);
+    border: 2px solid transparent;
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: white;
+    border-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+/* --- المحتوى --- */
+.leaderboard-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+/* --- المنصة (Top 3) --- */
+.podium-section {
+    margin-bottom: 32px;
+}
+
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 20px 0;
+}
+
+.podium-item {
+    background: white;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 20px 16px;
+    text-align: center;
+    flex: 1;
+    max-width: 200px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    transition: transform var(--transition-base);
+}
+
+.podium-item:hover {
+    transform: translateY(-8px);
+}
+
+.podium-1st {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 3px solid var(--accent);
+    height: 280px;
+    box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+    transform: translateY(-20px);
+}
+
+.podium-2nd {
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    border: 3px solid #9ca3af;
+    height: 240px;
+}
+
+.podium-3rd {
+    background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+    border: 3px solid #ea580c;
+    height: 220px;
+}
+
+.podium-rank {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.3rem;
+    box-shadow: var(--shadow-md);
+    font-family: var(--font-display);
+}
+
+.podium-1st .podium-rank { background: var(--accent); }
+.podium-3rd .podium-rank { background: #ea580c; }
+
+.podium-crown {
+    font-size: 2rem;
+    margin-bottom: 4px;
+    animation: crownFloat 2s ease infinite;
+}
+
+@keyframes crownFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-5deg); }
+}
+
+.podium-avatar {
+    font-size: 3rem;
+    margin: 12px 0;
+}
+
+.podium-1st .podium-avatar { font-size: 4rem; }
+
+.podium-name {
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.podium-score {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+/* --- قائمة المراكز --- */
+.rankings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ranking-item {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    animation: slideIn 0.4s ease;
+}
+
+.ranking-item:hover {
+    transform: translateX(-4px);
+    box-shadow: var(--shadow-md);
+    border-right: 4px solid var(--primary);
+}
+
+.ranking-position {
+    width: 44px;
+    height: 44px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: var(--primary);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    font-family: var(--font-display);
+}
+
+.ranking-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ranking-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ranking-meta {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ranking-class-tag {
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.ranking-score {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--accent-dark);
+    flex-shrink: 0;
+    font-family: var(--font-display);
+}
+
+.ranking-score-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+
+/* --- قسم الشعب --- */
+.classes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.class-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border-top: 4px solid var(--primary);
+    animation: scaleIn 0.4s ease;
+}
+
+.class-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.class-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.class-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.class-rank-badge {
+    background: var(--accent);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: var(--font-display);
+}
+
+.class-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-light);
+}
+
+.class-stat:last-child {
+    border-bottom: none;
+}
+
+.class-stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.class-stat-value {
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.participation-bar {
+    height: 8px;
+    background: var(--border-light);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.participation-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: var(--radius-full);
+    transition: width 1s ease;
+}
+
+/* --- الإحصائيات الكبيرة --- */
+.stats-grid-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.big-stat {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.big-stat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.big-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.big-stat-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.big-stat-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-family: var(--font-display);
+}
+
+.big-stat-label {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* --- حالة فارغة --- */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+}
+
+/* --- التجاوب --- */
+@media (max-width: 768px) {
+    .header-spacer { display: none; }
+    
+    .header-title h1 { font-size: 1.4rem; }
+    
+    .podium-container {
+        gap: 8px;
+    }
+    
+    .podium-item {
+        padding: 14px 8px;
+    }
+    
+    .podium-1st { height: 220px; }
+    .podium-2nd { height: 180px; }
+    .podium-3rd { height: 170px; }
+    
+    .podium-avatar { font-size: 2rem; }
+    .podium-1st .podium-avatar { font-size: 2.8rem; }
+    
+    .podium-name { font-size: 0.85rem; }
+    .podium-score { font-size: 0.75rem; padding: 3px 8px; }
+    
+    .ranking-item {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+    
+    .ranking-position {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .ranking-score {
+        font-size: 1.1rem;
+    }
+    
+    .ranking-name {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}

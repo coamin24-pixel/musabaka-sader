@@ -1,0 +1,377 @@
+/* ============================================
+   صفحة الدخول - Login Page Styles
+   ============================================ */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- خلفية مزخرفة --- */
+.bg-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: floatShape 15s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--secondary);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: 3s;
+}
+
+.shape-3 {
+    width: 250px;
+    height: 250px;
+    background: var(--accent);
+    top: 50%;
+    left: 10%;
+    animation-delay: 6s;
+}
+
+.shape-4 {
+    width: 200px;
+    height: 200px;
+    background: var(--primary-light);
+    top: 30%;
+    right: 15%;
+    animation-delay: 9s;
+}
+
+@keyframes floatShape {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.1); }
+    66% { transform: translate(-30px, 30px) scale(0.9); }
+}
+
+/* --- بطاقة الدخول --- */
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 
+        0 20px 60px rgba(30, 64, 175, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    background-size: 200% 100%;
+    animation: gradientMove 3s linear infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* --- شعار المدرسة --- */
+.school-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.logo-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 
+        0 12px 24px rgba(30, 64, 175, 0.3),
+        0 0 0 8px rgba(59, 130, 246, 0.1);
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+.logo-icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+/* --- ترويسة الدخول --- */
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.school-name {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+.competition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--accent) 0%, #fbbf24 100%);
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.badge-icon {
+    font-size: 1.3rem;
+}
+
+/* --- نموذج الدخول --- */
+.login-form {
+    margin-bottom: 24px;
+}
+
+.label-icon {
+    margin-left: 6px;
+    font-size: 1.2rem;
+}
+
+.student-input {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    background: var(--bg-primary);
+}
+
+.student-input::placeholder {
+    font-weight: 400;
+    letter-spacing: normal;
+    color: var(--text-light);
+}
+
+/* --- معلومات الطالب --- */
+.student-info {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 2px solid var(--success);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 20px;
+    animation: scaleIn 0.4s ease;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.info-row:not(:last-child) {
+    border-bottom: 1px dashed var(--success);
+}
+
+.info-label {
+    font-weight: 700;
+    color: #065f46;
+}
+
+.info-value {
+    font-weight: 800;
+    color: #064e3b;
+    font-size: 1.1rem;
+}
+
+/* --- زر الدخول --- */
+#loginButton {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    font-size: 1.2rem;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+}
+
+#loginButton:hover {
+    box-shadow: 0 14px 35px rgba(30, 64, 175, 0.4);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+    transition: transform var(--transition-base);
+}
+
+#loginButton:hover .btn-icon {
+    transform: translateX(-4px);
+}
+
+/* --- البطاقات المعلوماتية --- */
+.login-footer {
+    border-top: 1px solid var(--border-light);
+    padding-top: 24px;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.info-card {
+    background: var(--bg-primary);
+    padding: 14px 8px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.info-card:hover {
+    background: white;
+    border-color: var(--primary-light);
+    transform: translateY(-4px);
+}
+
+.info-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+.info-card-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card-text strong {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.info-card-text span {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* --- الروابط السفلية --- */
+.bottom-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bottom-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    transition: all var(--transition-base);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.bottom-link:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* --- التجاوب --- */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 28px 20px;
+    }
+    
+    .school-name {
+        font-size: 1.15rem;
+    }
+    
+    .competition-badge {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+    
+    .logo-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .logo-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .info-card {
+        display: flex;
+        align-items: center;
+        text-align: right;
+        padding: 12px 16px;
+    }
+    
+    .info-card-icon {
+        margin-bottom: 0;
+        margin-left: 12px;
+    }
+    
+    .info-card-text {
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+    }
+}

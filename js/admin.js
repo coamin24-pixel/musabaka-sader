@@ -346,7 +346,7 @@ function setupEventHandlers() {
     }
     const questionFilterSubject = document.getElementById('questionFilterSubject');
     if (questionFilterSubject) {
-        questionFilterSubject.addEventListener('change', filterQuestions);
+        questionِِFilterSubject.addEventListener('change', filterQuestions);
     }
 
     // Results filter
@@ -366,8 +366,106 @@ function setupEventHandlers() {
             if (e.target === overlay) closeModal(overlay.id);
         });
     });
+
+    // ===== رفع صورة السؤال من الجهاز =====
+    const questionImageFile = document.getElementById('questionImageFile');
+    if (questionImageFile) {
+        questionImageFile.addEventListener('change', handleQuestionImageUpload);
+    }
 }
 
+// رفع صورة السؤال من الجهاز إلى Supabase Storage
+async function handleQuestionImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const statusEl = document.getElementById('questionImageStatus');
+    const urlInput = document.getElementById('questionImageUrl');
+
+    if (!file.type.startsWith('image/')) {
+        showToast('error', 'الرجاء اختيار ملف صورة');
+        e.target.value = '';
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        showToast('error', 'حجم الصورة كبير جداً (الحد الأقصى 5MB)');
+        e.target.value = '';
+        return;
+    }
+
+    statusEl.innerHTML = '<span class="upload-spinner"></span> جاري رفع الصورة...';
+    e.target.disabled = true;
+
+    try {
+        const url = await uploadImageToStorage(file);
+        urlInput.value = url;
+        statusEl.innerHTML = '<span style="color: #059669;">✅ تم رفع الصورة بنجاح</span>';
+        updateQuestionImagePreview();
+        showToast('success', 'تم رفع الصورة');
+    } catch (error) {
+        console.error('Upload error:', error);
+        statusEl.innerHTML = `<span style="color: #dc2626;">❌ ${error.message || 'فشل الرفع'}</span>`;
+        showToast('error', 'فشل رفع الصورة: ' + (error.message || 'خطأ غير معروف'));
+        e.target.value = '';
+    } finally {
+        e.target.disabled = false;
+    }
+}
+
+async function uploadImageToStorage(file) {
+    if (!db) throw new Error('قاعدة البيانات غير متصلة');
+
+    const ext = file.name.split('.').pop().toLowerCase();
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    const filename = `questions/${timestamp}_${random}.${ext}`;
+
+    const { data, error } = await db.storage
+        .from('quiz-images')
+        .upload(filename, file, {
+            cacheControl: '3600',
+            upsert: false,
+            contentType: file.type
+        });
+
+    if (error) {
+        if (error.message && error.message.toLowerCase().includes('bucket')) {
+            throw new Error('Bucket "quiz-images" غير موجود في Supabase Storage');
+        }
+        throw error;
+    }
+
+    const { data: publicUrlData } = db.storage
+        .from('quiz-images')
+        .getPublicUrl(data.path);
+
+    return publicUrlData.publicUrl;
+}
+
+function updateQuestionImagePreview() {
+    const url = document.getElementById('questionImageUrl')?.value.trim();
+    const preview = document.getElementById('questionImagePreview');
+    if (!preview) return;
+
+    if (!url) {
+        preview.innerHTML = '';
+        return;
+    }
+
+    preview.innerHTML = `
+        <img src="${escapeHtml(url)}" alt="معاينة" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="color: #dc2626; font-size: 0.85rem; display: none;">⚠️ تعذر تحميل الصورة</div>
+        <span class="remove-image" onclick="clearQuestionImage()">🗑️ إزالة الصورة</span>
+    `;
+}
+
+window.clearQuestionImage = function() {
+    document.getElementById('questionImageUrl').value = '';
+    document.getElementById('questionImageFile').value = '';
+    document.getElementById('questionImageStatus').textContent = '';
+    document.getElementById('questionImagePreview').innerHTML = '';
+};
 async function handleStudentsFile(file) {
     if (!file.name.match(/\.(xlsx|xls)$/i)) {
         showToast('error', 'يرجى رفع ملف Excel (.xlsx أو .xls)');
@@ -872,6 +970,13 @@ function openQuestionModal(question = null, importData = null, importList = null
     document.getElementById('questionCorrectAnswer').value = data.correct_answer || '';
     document.getElementById('questionSubjectInput').value = data.subject || '';
     document.getElementById('questionImageUrl').value = data.image_url || '';
+    // إعادة تعيين حقل الرفع + إظهار المعاينة
+    const _fileInput = document.getElementById('questionImageFile');
+    if (_fileInput) _fileInput.value = '';
+    const _statusEl = document.getElementById('questionImageStatus');
+    if (_statusEl) _statusEl.textContent = '';
+    updateQuestionImagePreview();
+
     document.getElementById('questionDayInput').value = data.day_id || '';
 
     // Show import navigation if applicable

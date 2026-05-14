@@ -803,3 +803,43 @@
         font-size: 1.4rem;
     }
 }
+/* ===== Image Upload Preview ===== */
+.image-preview {
+    margin-top: 0.5rem;
+}
+
+.image-preview img {
+    max-width: 240px;
+    max-height: 160px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    display: block;
+    object-fit: contain;
+    background: #f8fafc;
+    padding: 4px;
+}
+
+.image-preview .remove-image {
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: underline;
+}
+
+.upload-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #cbd5e1;
+    border-top-color: #1e40af;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

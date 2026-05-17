@@ -10,8 +10,8 @@ const SUPABASE_CONFIG = {
     // إعدادات التطبيق
     SCHOOL_NAME: 'مدرسة الزبير بن العوام الابتدائية للبنين',
     COMPETITION_TITLE: 'المسابقة الثقافية للصف السادس',
-    QUESTIONS_PER_DAY: 18,
-    TIME_PER_QUESTION: 30, // ثواني
+    QUESTIONS_PER_DAY: 30,
+    TIME_PER_QUESTION: 60, // ثواني
     POINTS_BASE: 100, // النقاط الأساسية للإجابة الصحيحة
     SPEED_BONUS_MAX: 50, // أقصى نقاط إضافية للسرعة
     

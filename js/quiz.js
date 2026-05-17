@@ -12,7 +12,7 @@
     let currentQuestionIndex = 0;
     let currentSession = null;
     let timer = null;
-    let timeRemaining = 30;
+    let timeRemaining = 60;
     let selectedAnswer = null;
     let questionStartTime = null;
     let totalScore = 0;
@@ -258,9 +258,9 @@
 
     function SUBABASE_CONFIG_TIME_OR_DEFAULT() {
         try {
-            return window.SUPABASE_CONFIG.TIME_PER_QUESTION || 30;
+            return window.SUPABASE_CONFIG.TIME_PER_QUESTION || 60;
         } catch (e) {
-            return 30;
+            return 60;
         }
     }
 
